@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Pretty Useless Club</title>
+<meta name="description" content="One-page checkout — cart, shipping and payment for Pretty Useless Club.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<!-- ══════════ SHARED SVG SYMBOLS (same set as index.html) ══════════ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="egg-mascot" viewBox="0 0 100 120">
+    <path d="M50 8 C 76 8, 92 34, 92 66 C 92 96, 73 116, 50 116 C 27 116, 8 96, 8 66 C 8 34, 24 8, 50 8 Z" fill="#FFF9F0" stroke="#493B35" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <circle cx="36" cy="63" fill="#493B35" r="5"/>
+    <circle cx="64" cy="63" fill="#493B35" r="5"/>
+    <path d="M 45 73 Q 50 79 55 73" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 28 40 Q 25 52 26 60" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 32 32 Q 30 36 31 40" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+  </symbol>
+</svg>
+
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html" aria-label="Pretty Useless Club home">
+      <svg class="nav-logo-img" viewBox="0 0 100 120" aria-hidden="true"><use href="#egg-mascot"></use></svg>
+      <span>Pretty Useless Club</span>
+    </a>
+    <div class="nav-actions">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="active" href="checkout.html">Checkout</a></li>
+      </ul>
+      <button class="cart-btn" id="cartBtn" aria-label="Shopping cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/>
+        </svg>
+        <span class="cart-count" id="cartCountNav">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════════ PAGE HEADER ══════════ -->
+  <header class="page-header checkout-header">
+    <span class="section-label">Secure Checkout</span>
+    <h1>Checkout</h1>
+    <p>Review your cats, tell us where to send them, and pay in one go.</p>
+
+    <nav class="steps" aria-label="Checkout progress">
+      <ol class="steps__list">
+        <li class="steps__item is-active" data-step="cart">
+          <span class="steps__num">1</span><span class="steps__label">Cart</span>
+        </li>
+        <li class="steps__item" data-step="shipping">
+          <span class="steps__num">2</span><span class="steps__label">Details</span>
+        </li>
+        <li class="steps__item" data-step="payment">
+          <span class="steps__num">3</span><span class="steps__label">Payment</span>
+        </li>
+      </ol>
+    </nav>
+  </header>
+
+  <!-- ══════════ FREE SHIPPING BAR (mobile only) ══════════ -->
+  <div class="shipbar" id="shipbar" role="status" aria-live="polite">
+    <div class="shipbar__track"><div class="shipbar__fill" id="shipbarFill"></div></div>
+    <div class="shipbar__text" id="shipbarText">Add <b>HK$ 0.00</b> more for free global shipping</div>
+  </div>
+
+  <div class="layout">
+
+    <!-- ══════════════════ LEFT COLUMN ══════════════════ -->
+    <div class="col-main">
+
+      <!-- ─────────── 1. CART ITEMS ─────────── -->
+      <section class="card card--cart" id="section-cart" data-section="cart">
+        <div class="card__head">
+          <h2 class="card__title">
+            <span class="card__emoji" aria-hidden="true">🛒</span>
+            Your Cart <span class="card__count" id="cartCount"></span>
+          </h2>
+        </div>
+
+        <!-- Free shipping progress -->
+        <div class="ship-progress" id="shipProgress">
+          <div class="ship-progress__top">
+            <span class="ship-progress__badge" id="shipBadge">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.9" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="18" r="1.9" stroke="currentColor" stroke-width="1.7"/></svg>
+            </span>
+            <span class="ship-progress__msg" id="shipMsg">Add <b>HK$ 274.48</b> more for free global shipping</span>
+          </div>
+          <div class="ship-progress__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="shipTrack" aria-label="Free shipping progress">
+            <div class="ship-progress__fill" id="shipFill"><span class="ship-progress__paw" aria-hidden="true">🐾</span></div>
+          </div>
+          <p class="ship-progress__note">Free Global Shipping on orders over HK$ 274.48</p>
+        </div>
+
+        <!-- Cart items (rendered by JS) -->
+        <ul class="cart-list" id="cartList"></ul>
+
+        <!-- Empty state -->
+        <div class="empty" id="cartEmpty" hidden>
+          <span class="empty__art" aria-hidden="true">🐱</span>
+          <p class="empty__title">Your cart is empty</p>
+          <p class="empty__text">Go find a little cat to click.</p>
+          <a class="btn btn-outline" href="products.html">Shop bestsellers</a>
+        </div>
+
+        <!-- Cart footer hint -->
+        <div class="cart-foot" id="cartFoot">
+          <p class="cart-foot__hint" id="cartHint">💡 You're <b>HK$ 274.48</b> away from free shipping</p>
+        </div>
+      </section>
+
+      <!-- ══════════ ONE FORM, TWO CARDS ══════════ -->
+      <form class="form" id="checkoutForm" novalidate>
+
+        <!-- ─────────── 2. CONTACT & SHIPPING ─────────── -->
+        <section class="card" id="section-shipping" data-section="shipping">
+          <div class="card__head">
+            <h2 class="card__title">
+              <span class="card__emoji" aria-hidden="true">📬</span>
+              Contact &amp; Shipping
+            </h2>
+          </div>
+
+          <div class="card__body">
+
+            <!-- Contact -->
+            <fieldset class="fieldset">
+              <legend class="fieldset__legend"><span class="fieldset__step">2.1</span> Contact</legend>
+
+              <div class="field">
+                <label class="field__label" for="email">Email address <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="emailErr">
+                <p class="field__err" id="emailErr" role="alert"></p>
+                <p class="field__hint">We'll send your order confirmation here.</p>
+              </div>
+
+              <label class="check">
+                <input type="checkbox" id="optin" name="optin" checked>
+                <span class="check__box" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none"><path d="m3.5 8.2 3 3 6-6.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="check__text">
+                  <strong>Keep me updated on exclusive news and offers from Pretty Useless Club</strong>
+                  <small>New drops, limited editions and member-only offers.</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <!-- Shipping -->
+            <fieldset class="fieldset">
+              <legend class="fieldset__legend"><span class="fieldset__step">2.2</span> Shipping Address</legend>
+
+              <div class="field">
+                <label class="field__label" for="country">Country / Region <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select class="input select" id="country" name="country" required aria-describedby="countryErr">
+                    <option value="">Select country / region</option>
+                    <optgroup label="Hong Kong · Macao · Taiwan">
+                      <option value="HK" data-postal="optional" data-ship="30">Hong Kong, China</option>
+                      <option value="MO" data-postal="optional" data-ship="30">Macao, China</option>
+                      <option value="TW" data-postal="required" data-ship="30">Taiwan, China</option>
+                      <option value="CN" data-postal="required" data-ship="30">Mainland China</option>
+                    </optgroup>
+                    <optgroup label="Asia">
+                      <option value="JP" data-postal="required" data-ship="30">Japan</option>
+                      <option value="KR" data-postal="required" data-ship="30">South Korea</option>
+                      <option value="SG" data-postal="required" data-ship="30">Singapore</option>
+                      <option value="MY" data-postal="required" data-ship="30">Malaysia</option>
+                      <option value="TH" data-postal="required" data-ship="30">Thailand</option>
+                      <option value="VN" data-postal="required" data-ship="30">Vietnam</option>
+                      <option value="PH" data-postal="required" data-ship="30">Philippines</option>
+                      <option value="ID" data-postal="required" data-ship="30">Indonesia</option>
+                    </optgroup>
+                    <optgroup label="Europe">
+                      <option value="GB" data-postal="required" data-ship="30">United Kingdom</option>
+                      <option value="DE" data-postal="required" data-ship="30">Germany</option>
+                      <option value="FR" data-postal="required" data-ship="30">France</option>
+                      <option value="NL" data-postal="required" data-ship="30">Netherlands</option>
+                      <option value="IT" data-postal="required" data-ship="30">Italy</option>
+                      <option value="ES" data-postal="required" data-ship="30">Spain</option>
+                    </optgroup>
+                    <optgroup label="North America">
+                      <option value="US" data-postal="required" data-ship="30">United States</option>
+                      <option value="CA" data-postal="required" data-ship="30">Canada</option>
+                      <option value="MX" data-postal="required" data-ship="30">Mexico</option>
+                    </optgroup>
+                    <optgroup label="Rest of the world">
+                      <option value="AU" data-postal="required" data-ship="30">Australia</option>
+                      <option value="NZ" data-postal="required" data-ship="30">New Zealand</option>
+                    </optgroup>
+                  </select>
+                  <span class="select-wrap__chev" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none"><path d="m4 6.5 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+                <p class="field__err" id="countryErr" role="alert"></p>
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field__label" for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" type="text" id="firstName" name="firstName" placeholder="MEOW" autocomplete="given-name" required aria-describedby="firstNameErr">
+                  <p class="field__err" id="firstNameErr" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="lastName">Last name <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" type="text" id="lastName" name="lastName" placeholder="CAT" autocomplete="family-name" required aria-describedby="lastNameErr">
+                  <p class="field__err" id="lastNameErr" role="alert"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="address1">Address <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" type="text" id="address1" name="address1" placeholder="Street address" autocomplete="address-line1" required aria-describedby="address1Err">
+                <p class="field__err" id="address1Err" role="alert"></p>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="address2">Address line 2 <span class="opt">Optional</span></label>
+                <input class="input" type="text" id="address2" name="address2" placeholder="Apartment, suite, etc. (optional)" autocomplete="address-line2">
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field__label" for="city">City <span class="req" aria-hidden="true">*</span></label>
+                  <input class="input" type="text" id="city" name="city" placeholder="Hong Kong" autocomplete="address-level2" required aria-describedby="cityErr">
+                  <p class="field__err" id="cityErr" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="postal">Postal code <span class="opt" id="postalOpt">Optional</span><span class="req" id="postalReq" aria-hidden="true" hidden>*</span></label>
+                  <input class="input" type="text" id="postal" name="postal" placeholder="If applicable" autocomplete="postal-code">
+                  <p class="field__err" id="postalErr" role="alert"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="phone">Phone</label>
+                <input class="input" type="tel" id="phone" name="phone" placeholder="+852 0000 0000" autocomplete="tel">
+                <p class="field__hint">So the courier can reach you (optional).</p>
+              </div>
+            </fieldset>
+          </div><!-- /.card__body -->
+        </section>
+
+        <!-- ─────────── 3. PAYMENT ─────────── -->
+        <section class="card" id="section-payment" data-section="payment">
+          <div class="card__head">
+            <h2 class="card__title">
+              <span class="card__emoji" aria-hidden="true">💳</span>
+              Payment
+            </h2>
+          </div>
+
+          <div class="card__body">
+            <fieldset class="fieldset fieldset--pay">
+              <legend class="sr-only">Payment method</legend>
+
+              <div class="secure-note">
+                <span class="secure-note__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10.5" rx="2.4" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7.6a4 4 0 0 1 8 0V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </span>
+                <p>All transactions are secure and encrypted.</p>
+                <span class="secure-note__badge">PCI-DSS</span>
+              </div>
+
+              <!-- Credit card -->
+              <div class="payopt is-open" data-pay="card">
+                <div class="payopt__head">
+                  <label class="radio">
+                    <input type="radio" name="payment" value="card" checked>
+                    <span class="radio__dot" aria-hidden="true"></span>
+                    <span class="radio__label">Credit Card <span class="radio__en">Visa · Mastercard · AMEX · UnionPay</span></span>
+                  </label>
+                  <div class="cards" aria-label="Accepted card brands">
+                    <span class="cardchip cardchip--visa" aria-label="Visa">
+                      <img src="assets/visa.png" alt="Visa" loading="lazy" width="48" height="32">
+                    </span>
+                    <span class="cardchip cardchip--mc" aria-label="Mastercard">
+                      <svg viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mastercard"><rect width="48" height="32" rx="4" fill="#fff"/><circle cx="19.5" cy="16" r="8" fill="#EB001B"/><circle cx="28.5" cy="16" r="8" fill="#F79E1B" opacity="0.95"/><path d="M24 9.5a8 8 0 0 1 0 13 8 8 0 0 1 0-13Z" fill="#FF5F00"/></svg>
+                    </span>
+                    <span class="cardchip cardchip--amex" aria-label="American Express">
+                      <img src="assets/amex.jpg" alt="American Express" loading="lazy" width="48" height="32">
+                    </span>
+                    <span class="cardchip cardchip--unionpay" aria-label="UnionPay">
+                      <img src="assets/unionpay.png" alt="UnionPay" loading="lazy" width="48" height="32">
+                    </span>
+                  </div>
+                </div>
+
+                <div class="payopt__body">
+                  <div class="field">
+                    <label class="field__label" for="cardNumber">Card number <span class="req" aria-hidden="true">*</span></label>
+                    <div class="input-icon">
+                      <input class="input" type="text" id="cardNumber" name="cardNumber" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number" required aria-describedby="cardNumberErr">
+                      <span class="input-icon__tag" id="cardBrand">CARD</span>
+                    </div>
+                    <p class="field__err" id="cardNumberErr" role="alert"></p>
+                  </div>
+
+                  <div class="grid-2">
+                    <div class="field">
+                      <label class="field__label" for="cardExp">Expiration date <span class="req" aria-hidden="true">*</span></label>
+                      <input class="input" type="text" id="cardExp" name="cardExp" inputmode="numeric" placeholder="MM/YY" autocomplete="cc-exp" required aria-describedby="cardExpErr">
+                      <p class="field__err" id="cardExpErr" role="alert"></p>
+                    </div>
+                    <div class="field">
+                      <label class="field__label" for="cardCvc">Security code <span class="req" aria-hidden="true">*</span></label>
+                      <div class="input-icon">
+                        <input class="input" type="text" id="cardCvc" name="cardCvc" inputmode="numeric" placeholder="CVC" autocomplete="cc-csc" required aria-describedby="cardCvcErr">
+                        <span class="input-icon__tag input-icon__tag--muted" title="3 digits on the back of your card">
+                          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 10.2a3 3 0 0 1 6 0c0 1.6-1.5 1.8-1.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="15.2" r="1" fill="currentColor"/></svg>
+                        </span>
+                      </div>
+                      <p class="field__err" id="cardCvcErr" role="alert"></p>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="cardName">Name on card <span class="req" aria-hidden="true">*</span></label>
+                    <input class="input" type="text" id="cardName" name="cardName" placeholder="MEOW CAT" autocomplete="cc-name" required aria-describedby="cardNameErr">
+                    <p class="field__err" id="cardNameErr" role="alert"></p>
+                  </div>
+
+                  <label class="check">
+                    <input type="checkbox" id="sameBilling" name="sameBilling" checked>
+                    <span class="check__box" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none"><path d="m3.5 8.2 3 3 6-6.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span class="check__text">
+                      <strong>Use shipping address as billing address</strong>
+                      <small>We'll only ask for a separate one if you uncheck this.</small>
+                    </span>
+                  </label>
+
+                  <!-- Billing fields (revealed when unchecked) -->
+                  <div class="billing" id="billingFields" hidden>
+                    <p class="billing__title">Billing Address</p>
+                    <div class="field">
+                      <label class="field__label" for="billAddress1">Address <span class="req" aria-hidden="true">*</span></label>
+                      <input class="input" type="text" id="billAddress1" name="billAddress1" autocomplete="billing address-line1" aria-describedby="billAddress1Err">
+                      <p class="field__err" id="billAddress1Err" role="alert"></p>
+                    </div>
+                    <div class="grid-2">
+                      <div class="field">
+                        <label class="field__label" for="billCity">City <span class="req" aria-hidden="true">*</span></label>
+                        <input class="input" type="text" id="billCity" name="billCity" autocomplete="billing address-level2" aria-describedby="billCityErr">
+                        <p class="field__err" id="billCityErr" role="alert"></p>
+                      </div>
+                      <div class="field">
+                        <label class="field__label" for="billPostal">Postal code</label>
+                        <input class="input" type="text" id="billPostal" name="billPostal" autocomplete="billing postal-code">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Local / alternative payments -->
+              <div class="paygroup">
+                <p class="paygroup__title">Alternative Payment</p>
+
+                <label class="payopt payopt--radio">
+                  <input type="radio" name="payment" value="alipay">
+                  <span class="radio__dot" aria-hidden="true"></span>
+                  <span class="payopt__logo payopt__logo--alipay" aria-hidden="true">
+                    <img src="assets/alipay.png" alt="Alipay" loading="lazy" width="74" height="28">
+                  </span>
+                  <span class="radio__label">Alipay</span>
+                </label>
+
+                <label class="payopt payopt--radio">
+                  <input type="radio" name="payment" value="wechat">
+                  <span class="radio__dot" aria-hidden="true"></span>
+                  <span class="payopt__logo payopt__logo--wechat" aria-hidden="true">
+                    <img src="assets/wechat-pay.png" alt="WeChat Pay" loading="lazy" width="28" height="28">
+                  </span>
+                  <span class="radio__label">WeChat Pay</span>
+                </label>
+
+              </div>
+            </fieldset>
+
+            <!-- Pay now -->
+            <div class="paynow">
+              <button type="button" class="btn btn-primary btn--pay" id="payBtn">
+                <span class="btn__label">Pay now</span>
+                <span class="btn__amount" id="payBtnAmount">HK$ 274.48</span>
+              </button>
+              <p class="paynow__terms">By placing your order you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+              <p class="paynow__secure">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.6 4.5 5.8v5.4c0 4.6 3.1 8.8 7.5 10.2 4.4-1.4 7.5-5.6 7.5-10.2V5.8L12 2.6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.8 12 2.3 2.3 4.3-4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Secured with 256-bit SSL · We never store your card details
+              </p>
+            </div>
+          </div><!-- /.card__body -->
+        </section>
+      </form>
+    </div>
+
+    <!-- ══════════════════ RIGHT COLUMN — STICKY SUMMARY ══════════════════ -->
+    <aside class="col-side">
+      <div class="summary" id="summary">
+
+        <div class="summary__head">
+          <h2 class="summary__title">Order Summary</h2>
+        </div>
+
+        <!-- Promo code -->
+        <div class="promo">
+          <label class="promo__label" for="promo">Promo Code</label>
+          <div class="promo__row">
+            <input class="input" type="text" id="promo" placeholder="Enter code" autocomplete="off">
+            <button type="button" class="btn btn-outline btn-sm" id="promoApply">Apply</button>
+          </div>
+          <p class="promo__msg" id="promoMsg" role="status"></p>
+        </div>
+
+        <!-- Line items -->
+        <ul class="summary__items" id="summaryItems"></ul>
+
+        <!-- Totals -->
+        <dl class="totals">
+          <div class="totals__row">
+            <dt>Subtotal</dt>
+            <dd id="sumSubtotal">HK$ 0.00</dd>
+          </div>
+          <div class="totals__row">
+            <dt>Shipping Fee</dt>
+            <dd id="sumShipping" class="is-free">FREE</dd>
+          </div>
+          <div class="totals__row totals__row--discount" id="sumDiscountRow" hidden>
+            <dt>Discount Applied</dt>
+            <dd id="sumDiscount">−HK$ 0.00</dd>
+          </div>
+        </dl>
+
+        <div class="grand">
+          <span class="grand__label">Total</span>
+          <span class="grand__amount" id="sumTotal">HK$ 274.48</span>
+        </div>
+
+        <button type="button" class="btn btn-primary btn--block" id="sidePayBtn">Pay now</button>
+
+        <!-- Trust badges -->
+        <ul class="trust">
+          <li class="trust__item">
+            <span class="trust__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.5 5.8v5.4c0 4.6 3.1 8.8 7.5 10.2 4.4-1.4 7.5-5.6 7.5-10.2V5.8L12 2.6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8.8 12 2.3 2.3 4.3-4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>Secure encrypted payment</strong><small>256-bit SSL · PCI-DSS compliant</small></span>
+          </li>
+          <li class="trust__item">
+            <span class="trust__icon trust__icon--mint" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 4.6 5.6v5.6c0 4.7 3.1 8.9 7.4 10 4.3-1.1 7.4-5.3 7.4-10V5.6L12 2.8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 8.4v3.4m0 3.2h.01" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            </span>
+            <span><strong>Authenticity guaranteed</strong><small>100% genuine products</small></span>
+          </li>
+          <li class="trust__item">
+            <span class="trust__icon trust__icon--blush" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5h16v11H4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 7.2 12 13l8-5.8" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <span><strong>Need a hand?</strong><small>hello@prettyuseless.club · Ships in 3–5 days</small></span>
+          </li>
+        </ul>
+
+      </div>
+    </aside>
+  </div>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <span class="footer-brand">
+          <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#egg-mascot"></use></svg>
+          Pretty Useless Club
+        </span>
+        <p>Quirky emotional support toys from Hong Kong. Click. Chill. Repeat.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="index.html#clicker">Clicker</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Pretty Useless Club. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ══════════ TOAST ══════════ -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span class="toast__icon" id="toastIcon">🐾</span>
+  <span class="toast__msg" id="toastMsg"></span>
+</div>
+
+<!-- ══════════ SUCCESS OVERLAY ══════════ -->
+<div class="success" id="success" hidden>
+  <div class="success__card">
+    <span class="success__art" aria-hidden="true">🎉</span>
+    <h2 class="success__title">Payment successful!</h2>
+    <p class="success__text" id="successText">We're packing your cats now.</p>
+    <p class="success__ref">Order number <b id="successRef">PUC-000000</b></p>
+    <button type="button" class="btn btn-primary" id="successClose">Continue shopping</button>
+  </div>
+</div>
+
+<script src="cart-store.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+/* ==================== ABOUT PAGE STYLES ====================
+   Scoped entirely under .puc-about-page.
+   Loaded after style.css. Uses shared design tokens only. */
+
+/* ---- Fixed-nav offset & smooth-scroll preference ---- */
+.puc-about-page main {
+  /* Anchor targets account for the fixed 80px navigation */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puc-about-page {
+    scroll-behavior: auto;
+  }
+  .puc-about-page *,
+  .puc-about-page *::before,
+  .puc-about-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Skip link ---- */
+.puc-about-page .puc-about-skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 2000;
+  padding: 12px 20px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-cocoa);
+  background: var(--color-butter);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: top var(--transition-fast);
+}
+
+.puc-about-page .puc-about-skip-link:focus {
+  top: 12px;
+}
+
+/* ---- Hero ---- */
+.puc-about-page .puc-about-hero {
+  padding: calc(var(--nav-height) + 64px) 24px 88px;
+  background: linear-gradient(180deg, var(--color-mint) 0%, var(--color-cream) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.puc-about-page .puc-about-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.puc-about-page .puc-about-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-cocoa);
+  background: var(--color-white);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px var(--color-shadow);
+}
+
+.puc-about-page .puc-about-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  margin-bottom: 18px;
+}
+
+.puc-about-page .puc-about-hero h1 .accent {
+  color: var(--color-butter-dark);
+  text-shadow: 2px 2px 0 rgba(73, 59, 53, 0.08);
+}
+
+.puc-about-page .puc-about-hero-intro {
+  font-size: 1.15rem;
+  color: var(--color-cocoa);
+  max-width: 480px;
+  margin-bottom: 12px;
+}
+
+.puc-about-page .puc-about-hero-note {
+  font-size: 1rem;
+  color: var(--color-cocoa-light);
+  max-width: 480px;
+  margin-bottom: 28px;
+}
+
+.puc-about-page .puc-about-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.puc-about-page .puc-about-hero-tagline {
+  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-cocoa-light);
+}
+
+.puc-about-page .puc-about-hero-tagline::before {
+  content: '';
+  width: 28px;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--color-butter);
+}
+
+/* Hero image with pastel backing shape */
+.puc-about-page .puc-about-hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.puc-about-page .puc-about-hero-visual::before {
+  content: '';
+  position: absolute;
+  width: 86%;
+  aspect-ratio: 1;
+  border-radius: 42% 58% 55% 45% / 50% 44% 56% 50%;
+  background: linear-gradient(140deg, var(--color-blush) 0%, var(--color-lilac) 60%, var(--color-mint) 100%);
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.puc-about-page .puc-about-hero-photo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--radius-xl);
+  border: 6px solid var(--color-white);
+  box-shadow: 0 20px 48px rgba(73, 59, 53, 0.14);
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.puc-about-page .puc-about-hero-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- Shared section scaffolding ---- */
+.puc-about-page .puc-about-section {
+  padding: 96px 24px;
+}
+
+.puc-about-page .puc-about-section-header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto 52px;
+}
+
+.puc-about-page .puc-about-section-header h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-bottom: 12px;
+}
+
+.puc-about-page .puc-about-section-header p {
+  font-size: 1.05rem;
+  color: var(--color-cocoa-light);
+}
+
+/* ---- Our Story ---- */
+.puc-about-page .puc-about-story {
+  background: var(--color-cream);
+}
+
+.puc-about-page .puc-about-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.puc-about-page .puc-about-story-photo {
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--radius-lg);
+  border: 5px solid var(--color-white);
+  box-shadow: 0 16px 40px rgba(73, 59, 53, 0.12);
+  overflow: hidden;
+  margin: 0 auto;
+  background: var(--color-white);
+}
+
+.puc-about-page .puc-about-story-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.puc-about-page .puc-about-story-copy h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-bottom: 20px;
+}
+
+.puc-about-page .puc-about-story-copy p {
+  font-size: 1.05rem;
+  color: var(--color-cocoa-light);
+  margin-bottom: 16px;
+  max-width: 540px;
+}
+
+/* ---- Journey ---- */
+.puc-about-page .puc-about-journey {
+  background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-lilac) 100%);
+}
+
+.puc-about-page .puc-about-timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1080px;
+  margin: 0 auto;
+  list-style: none;
+  position: relative;
+  counter-reset: puc-step;
+}
+
+.puc-about-page .puc-about-timeline::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 14%;
+  right: 14%;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: repeating-linear-gradient(90deg, rgba(73, 59, 53, 0.22) 0 10px, transparent 10px 20px);
+}
+
+.puc-about-page .puc-about-step {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(73, 59, 53, 0.06);
+  padding: 30px 26px;
+  text-align: center;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-base);
+}
+
+@supports (hover: hover) {
+  .puc-about-page .puc-about-step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(73, 59, 53, 0.1);
+  }
+}
+
+.puc-about-page .puc-about-step-number {
+  counter-increment: puc-step;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-cocoa);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 14px var(--color-shadow);
+}
+
+.puc-about-page .puc-about-step-number::before {
+  content: '0' counter(puc-step);
+}
+
+.puc-about-page .puc-about-step:nth-child(1) .puc-about-step-number { background: var(--color-blush); }
+.puc-about-page .puc-about-step:nth-child(2) .puc-about-step-number { background: var(--color-lilac); }
+.puc-about-page .puc-about-step:nth-child(3) .puc-about-step-number { background: var(--color-mint); }
+
+.puc-about-page .puc-about-step h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.puc-about-page .puc-about-step p {
+  font-size: 0.98rem;
+  color: var(--color-cocoa-light);
+}
+
+/* ---- Hong Kong feature ---- */
+.puc-about-page .puc-about-hk {
+  background: var(--color-mint);
+}
+
+.puc-about-page .puc-about-hk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.puc-about-page .puc-about-hk-photo {
+  width: 100%;
+  max-width: 380px;
+  border-radius: var(--radius-lg);
+  border: 5px solid var(--color-white);
+  box-shadow: 0 16px 40px rgba(73, 59, 53, 0.14);
+  overflow: hidden;
+  margin: 0 auto;
+  background: var(--color-white);
+  transform: rotate(-2deg);
+}
+
+.puc-about-page .puc-about-hk-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.puc-about-page .puc-about-hk-copy h2 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-bottom: 18px;
+}
+
+.puc-about-page .puc-about-hk-copy p {
+  font-size: 1.05rem;
+  color: var(--color-cocoa);
+  max-width: 480px;
+}
+
+/* ---- Philosophy ---- */
+.puc-about-page .puc-about-philosophy {
+  background: var(--color-white);
+  border-top: 2px dashed rgba(73, 59, 53, 0.1);
+  border-bottom: 2px dashed rgba(73, 59, 53, 0.1);
+}
+
+.puc-about-page .puc-about-philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.puc-about-page .puc-about-value-card {
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  text-align: center;
+  border: 2px solid rgba(73, 59, 53, 0.06);
+  transition: transform var(--transition-bounce), box-shadow var(--transition-base);
+}
+
+@supports (hover: hover) {
+  .puc-about-page .puc-about-value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(73, 59, 53, 0.08);
+  }
+}
+
+.puc-about-page .puc-about-value-blush { background: var(--color-blush); }
+.puc-about-page .puc-about-value-lilac { background: var(--color-lilac); }
+.puc-about-page .puc-about-value-mint  { background: var(--color-mint); }
+
+.puc-about-page .puc-about-value-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-cocoa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 14px var(--color-shadow);
+}
+
+.puc-about-page .puc-about-value-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.puc-about-page .puc-about-value-card p {
+  font-size: 0.98rem;
+  color: var(--color-cocoa-light);
+}
+
+/* ---- Closing CTA ---- */
+.puc-about-page .puc-about-cta {
+  padding: 96px 24px;
+  background: var(--color-cream);
+}
+
+.puc-about-page .puc-about-cta-panel {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--color-butter);
+  border-radius: var(--radius-xl);
+  padding: 64px 48px;
+  text-align: center;
+  box-shadow: 0 18px 44px rgba(246, 214, 107, 0.4);
+}
+
+.puc-about-page .puc-about-cta-panel h2 {
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  margin-bottom: 12px;
+}
+
+.puc-about-page .puc-about-cta-panel p {
+  font-size: 1.08rem;
+  color: var(--color-cocoa);
+  max-width: 480px;
+  margin: 0 auto 30px;
+}
+
+.puc-about-page .puc-about-cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.puc-about-page .puc-about-cta-panel .btn-primary {
+  background: var(--color-cocoa);
+  color: var(--color-cream);
+  box-shadow: 0 6px 20px rgba(73, 59, 53, 0.25);
+}
+
+.puc-about-page .puc-about-cta-panel .btn-primary:hover {
+  background: #3a2f2a;
+}
+
+.puc-about-page .puc-about-cta-secondary {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-cocoa);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+  transition: color var(--transition-fast);
+}
+
+.puc-about-page .puc-about-cta-secondary:hover {
+  color: var(--color-white);
+}
+
+/* ---- Source note ---- */
+.puc-about-page .puc-about-note {
+  padding: 36px 24px 48px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-cocoa-light);
+  background: var(--color-cream);
+}
+
+.puc-about-page .puc-about-note a {
+  color: var(--color-cocoa-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.puc-about-page .puc-about-note a:hover {
+  color: var(--color-cocoa);
+}
+
+/* ---- Responsive: tablet & below ---- */
+@media (max-width: 900px) {
+  .puc-about-page .puc-about-hero-grid,
+  .puc-about-page .puc-about-story-grid,
+  .puc-about-page .puc-about-hk-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .puc-about-page .puc-about-hero-visual { order: -1; }
+  .puc-about-page .puc-about-hero-photo { max-width: 320px; }
+  .puc-about-page .puc-about-story-photo { max-width: 340px; }
+
+  .puc-about-page .puc-about-timeline {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .puc-about-page .puc-about-timeline::before {
+    top: 8%;
+    bottom: 8%;
+    left: 58px;
+    right: auto;
+    width: 3px;
+    height: auto;
+    background: repeating-linear-gradient(180deg, rgba(73, 59, 53, 0.22) 0 10px, transparent 10px 20px);
+  }
+
+  .puc-about-page .puc-about-step {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    gap: 18px;
+    text-align: left;
+    align-items: start;
+    padding: 24px 22px;
+  }
+
+  .puc-about-page .puc-about-step .puc-about-step-number { margin: 0; }
+  .puc-about-page .puc-about-step h3 { margin-top: 4px; }
+
+  .puc-about-page .puc-about-philosophy-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .puc-about-page .puc-about-cta-panel {
+    padding: 48px 28px;
+  }
+
+  .puc-about-page .puc-about-section {
+    padding: 72px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .puc-about-page .puc-about-hero { padding-top: calc(var(--nav-height) + 40px); }
+  .puc-about-page .puc-about-hero-photo { max-width: 270px; }
+  .puc-about-page .puc-about-hero-actions,
+  .puc-about-page .puc-about-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .puc-about-page .puc-about-hero-actions .btn,
+  .puc-about-page .puc-about-cta-actions .btn {
+    width: 100%;
+  }
+  .puc-about-page .puc-about-cta-secondary {
+    text-align: center;
+  }
+}

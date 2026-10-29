@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clicker Keychains and Desk Toys | Pretty Useless Club</title>
+<meta name="description" content="Explore Hong Kong inspired clicker keychains, Working Cat desk toys and collectible blind boxes in this Pretty Useless Club student project.">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="products.css">
+<script src="cart-store.js" defer></script>
+<script src="products.js" defer></script>
+<style>
+  /* Deep-link target: scroll offset under fixed nav + highlight pulse */
+  .shop-card{scroll-margin-top:calc(var(--nav-height,80px) + 24px)}
+  @keyframes cardHighlight{
+    0%{box-shadow:0 0 0 0 rgba(246,214,107,.7)}
+    50%{box-shadow:0 0 0 8px rgba(246,214,107,.45)}
+    100%{box-shadow:0 0 0 0 rgba(246,214,107,0)}
+  }
+  .shop-card--highlight{animation:cardHighlight 1.6s ease-out 2;border:2px solid #E4C04B!important}
+</style>
+</head>
+<body class="products-page">
+
+<!-- Shared SVG mascot -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="egg-mascot" viewBox="0 0 100 120">
+    <path d="M50 8 C 76 8, 92 34, 92 66 C 92 96, 73 116, 50 116 C 27 116, 8 96, 8 66 C 8 34, 24 8, 50 8 Z" fill="#FFF9F0" stroke="#493B35" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <circle cx="36" cy="63" fill="#493B35" r="5"/>
+    <circle cx="64" cy="63" fill="#493B35" r="5"/>
+    <path d="M 45 73 Q 50 79 55 73" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 28 40 Q 25 52 26 60" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 32 32 Q 30 36 31 40" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to products</a>
+
+<!-- ==================== NAVIGATION (shared) ==================== -->
+<nav id="navbar" aria-label="Main navigation">
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html" aria-label="Pretty Useless Club home">
+      <svg class="nav-logo-img" viewBox="0 0 100 120" aria-hidden="true"><use href="#egg-mascot"></use></svg>
+      <span>Pretty Useless Club</span>
+    </a>
+    <div class="nav-actions">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active" aria-current="page">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+      <button class="cart-btn" id="cartBtn" type="button" aria-label="Open demo shopping cart">
+        <svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22">
+          <path d="M6 6h15l-1.5 9h-12z"/>
+          <circle cx="9" cy="20" r="1"/>
+          <circle cx="18" cy="20" r="1"/>
+          <path d="M6 6L5 3H2"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu" type="button">
+        <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="24">
+          <line x1="3" x2="21" y1="6" y2="6"/>
+          <line x1="3" x2="21" y1="12" y2="12"/>
+          <line x1="3" x2="21" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+  <header class="shop-hero">
+    <div class="container">
+      <p class="eyebrow">LITTLE THINGS. LOVELY COMPANY.</p>
+      <h1>Clicker keychains<br>and desk companions.</h1>
+      <p class="intro">A little useless. A lot of comfort.<br>Find a clicky pocket friend, a tiny coworker, or a Hong Kong keepsake.</p>
+      <a class="hero-cta" href="#catalogue">Find your little companion ↓</a>
+      <span class="hero-flower" aria-hidden="true">✿</span>
+    </div>
+  </header>
+
+  <div class="shop-trust">
+    <span>Designed in Hong Kong</span>
+    <span>Clickers, desk toys and blind boxes</span>
+    <span>For ages 14 and up</span>
+  </div>
+
+  <section id="catalogue" class="container catalogue" aria-label="Product catalogue">
+    <div class="catalogue-top">
+      <div>
+        <p class="eyebrow">THE LITTLE LINEUP</p>
+        <h2>Pick your kind of company.</h2>
+      </div>
+      <label class="search-label" for="search">Find a companion
+        <input type="search" id="search" placeholder="Try cat, tram or snack…">
+      </label>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter products">
+      <button type="button" data-filter="all" aria-pressed="true">All companions</button>
+      <button type="button" data-filter="Hong Kong favourites" aria-pressed="false">Hong Kong favourites</button>
+      <button type="button" data-filter="Desk companions" aria-pressed="false">Desk companions</button>
+      <button type="button" data-filter="Blind boxes" aria-pressed="false">Blind boxes</button>
+      <button type="button" data-filter="Clicky keychains" aria-pressed="false">Clicky keychains</button>
+    </div>
+
+    <div class="catalogue-meta">
+      <p id="resultCount" role="status">4 companions to meet</p>
+      <label for="sort">Sort by
+        <select id="sort">
+          <option value="featured">Featured</option>
+          <option value="low">Price low to high</option>
+          <option value="high">Price high to low</option>
+        </select>
+      </label>
+    </div>
+
+    <p class="demo-note">Student project · Demo cart only. HKD prices are illustrative conversions of the store's USD prices at US$1 = HK$7.80, checked 26 October 2026. Official pricing and availability may change.</p>
+
+    <div class="shop-grid" id="productGrid">
+
+      <article class="shop-card" id="product-tram" data-product="tram" data-category="Hong Kong favourites Blind boxes" data-search="HK Tram Clicker Blind Box An iconic ding ding, made pocket-sized. Discover a miniature tram from the Hong Kong Tramways collaboration. Hong Kong favourites">
+        <div class="photo"><img src="assets/tram.jpg" alt="Hong Kong Tramways miniature clicker collection" width="900" height="900" fetchpriority="high"><span>Hong Kong favourites</span></div>
+        <div class="card-body">
+          <h2>HK Tram Clicker Blind Box</h2>
+          <p class="description">An iconic ding ding, made pocket-sized. Discover a miniature tram from the Hong Kong Tramways collaboration.</p>
+          <details><summary>What is inside?</summary><p>Single box: one random design. Four-box set: no duplicates. A hidden edition is not guaranteed. Pre-order: check current dispatch details on the official store.</p></details>
+          <label for="variant-tram">Choose an option</label>
+          <select id="variant-tram">
+            <option value="0">Single(random) — HK$94.46</option>
+            <option value="1">Full Set(4 boxes) — HK$377.68</option>
+          </select>
+          <div class="buy-row">
+            <p class="price" id="price-tram">HK$94.46<small>Illustrative demo price</small></p>
+            <button class="shop-add" data-id="tram" type="button" aria-label="Add HK Tram Clicker Blind Box to demo cart">Add to cart</button>
+          </div>
+          <a class="official" href="https://www.prettyuseless.club/products/my-emotional-support-hk-tram-clicker-blind-box-香港電車-clicker-盲盒" target="_blank" rel="noopener">View on official store ↗</a>
+        </div>
+      </article>
+
+      <article class="shop-card" id="product-workcat" data-product="workcat" data-category="Desk companions Blind boxes" data-search="Working Cat Blind Box A tiny coworker for your desk. Meet collectible office cats with wiggly tails and very relatable personalities. Desk companions">
+        <div class="photo"><img src="assets/workcat.jpg" alt="Working Cat collectible office cat figures and packaging" width="900" height="900" loading="lazy"><span>Desk companions</span></div>
+        <div class="card-body">
+          <h2>Working Cat Blind Box</h2>
+          <p class="description">A tiny coworker for your desk. Meet collectible office cats with wiggly tails and very relatable personalities.</p>
+          <details><summary>What is inside?</summary><p>Single box: one random cat. Full set: eight toys. A hidden edition is not guaranteed.</p></details>
+          <label for="variant-workcat">Choose an option</label>
+          <select id="variant-workcat">
+            <option value="0">Single(Random) — HK$62.40</option>
+            <option value="1">Full set(8 toys) — HK$499.20</option>
+          </select>
+          <div class="buy-row">
+            <p class="price" id="price-workcat">HK$62.40<small>Illustrative demo price</small></p>
+            <button class="shop-add" data-id="workcat" type="button" aria-label="Add Working Cat Blind Box to demo cart">Add to cart</button>
+          </div>
+          <a class="official" href="https://www.prettyuseless.club/products/my-emotional-support-working-cat-blind-box" target="_blank" rel="noopener">View on official store ↗</a>
+        </div>
+      </article>
+
+      <article class="shop-card" id="product-snack" data-product="snack" data-category="Hong Kong favourites Blind boxes" data-search="HK Snack Clicker Blind Box Your snack break, with a click. Hong Kong comfort-food designs become tiny keychain companions. Hong Kong favourites">
+        <div class="photo"><img src="assets/snack.jpg" alt="Hong Kong snack themed clicker keychains" width="900" height="900" loading="lazy"><span>Hong Kong favourites</span></div>
+        <div class="card-body">
+          <h2>HK Snack Clicker Blind Box</h2>
+          <p class="description">Your snack break, with a click. Hong Kong comfort-food designs become tiny keychain companions.</p>
+          <details><summary>What is inside?</summary><p>Single box: one random snack. Full set: six toys. A hidden edition is not guaranteed.</p></details>
+          <label for="variant-snack">Choose an option</label>
+          <select id="variant-snack">
+            <option value="0">Single (Random) — HK$66.30</option>
+            <option value="1">Full Set (6 Toy) — HK$374.40</option>
+          </select>
+          <div class="buy-row">
+            <p class="price" id="price-snack">HK$66.30<small>Illustrative demo price</small></p>
+            <button class="shop-add" data-id="snack" type="button" aria-label="Add HK Snack Clicker Blind Box to demo cart">Add to cart</button>
+          </div>
+          <a class="official" href="https://www.prettyuseless.club/products/emotional-support-hk-snack-clicker-blindbox" target="_blank" rel="noopener">View on official store ↗</a>
+        </div>
+      </article>
+
+      <article class="shop-card" data-product="clicker" data-category="Clicky keychains" data-search="Hong Kong and Macau Clicker Carry a little local nostalgia. Choose a food or city-inspired design for your next everyday companion. Clicky keychains">
+        <div class="photo"><img src="assets/clicker.jpg" alt="Hong Kong and Macau food and city themed clickers" width="900" height="900" loading="lazy"><span>Clicky keychains</span></div>
+        <div class="card-body">
+          <h2>Hong Kong and Macau Clicker</h2>
+          <p class="description">Carry a little local nostalgia. Choose a food or city-inspired design for your next everyday companion.</p>
+          <details><summary>What is inside?</summary><p>Choose your design before adding it. This collection offers named designs rather than a random blind box.</p></details>
+          <label for="variant-clicker">Choose an option</label>
+          <select id="variant-clicker">
+            <option value="0">香港・燒賣 (Hong Kong · Siu Mai) — HK$66.30</option>
+            <option value="1">開心・咖喱魚蛋 (Happy · Curry Fish Balls) — HK$66.30</option>
+            <option value="2">九龍・菠蘿油(Kowloon · Pineapple Bun with Butter) — HK$66.30</option>
+            <option value="3">香港・雞蛋仔 (Hong Kong · Egg Waffle) — HK$66.30</option>
+            <option value="4">澳門・葡撻 (Macau · Portuguese Egg Tart) — HK$66.30</option>
+            <option value="5">澳門・777(Macau · 777) — HK$66.30</option>
+            <option value="6">澳門・發達啦(Macau · Get Rich!) — HK$66.30</option>
+          </select>
+          <div class="buy-row">
+            <p class="price" id="price-clicker">HK$66.30<small>Illustrative demo price</small></p>
+            <button class="shop-add" data-id="clicker" type="button" aria-label="Add Hong Kong and Macau Clicker to demo cart">Add to cart</button>
+          </div>
+          <a class="official" href="https://www.prettyuseless.club/products/emotional-support-hongkong-macau-clicker-香港-澳門特色解壓按鈕" target="_blank" rel="noopener">View on official store ↗</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div id="empty" hidden>
+      <h2>No companions found yet.</h2>
+      <p>Try another word or see the whole lineup.</p>
+      <button type="button" id="reset">Show all companions</button>
+    </div>
+    <noscript><p>Enable JavaScript for filters and the demo cart. Product information and official store links remain available.</p></noscript>
+  </section>
+
+  <section class="shop-help container">
+    <h2>A few little things to know.</h2>
+    <details><summary>Can I choose a blind box design?</summary><p>Single blind boxes contain a random design. Set contents differ by series, and a hidden edition is not guaranteed. Choose a named design from the Hong Kong and Macau Clicker collection if you prefer to know what you will receive.</p></details>
+    <details><summary>Are these toys for small children?</summary><p>The brand specifies ages 14 and up. They are not for small children or chewing.</p></details>
+    <details><summary>Where can I place a real order?</summary><p>This is a student website with a demonstration cart. Use the official store links for current prices, stock, shipping and real orders. Product-specific dispatch notices take precedence over general shipping information.</p></details>
+    <a class="official" href="about.html">Meet the brand →</a>
+    <a class="official" href="reviews.html">Explore the reviews page →</a>
+  </section>
+</main>
+
+<!-- ==================== SHARED FOOTER ==================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="footer-brand" href="index.html">
+          <svg aria-hidden="true" viewBox="0 0 100 120"><use href="#egg-mascot"></use></svg>
+          Pretty Useless Club
+        </a>
+        <p>Emotional support toys for overworked souls. Born in Hong Kong.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html">New Arrivals</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Follow</h4>
+        <div class="social-links">
+          <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/prettyuseless.club/?hl=en" target="_blank" rel="noopener">
+            <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <rect height="20" rx="5" ry="5" width="20" x="2" y="2"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>MKTG3524 student project. Unofficial demonstration. Product photographs and product information: Pretty Useless Club.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart dialog -->
+<dialog id="cartDialog" aria-labelledby="cartTitle">
+  <div class="dialog-top">
+    <h2 id="cartTitle">Your little companions</h2>
+    <button type="button" id="closeCart" aria-label="Close shopping cart">✕</button>
+  </div>
+  <p>Demo cart · No payment or order is processed.</p>
+  <div id="cartItems"></div>
+  <p class="cart-total">Subtotal <strong id="cartTotal">HK$0.00</strong></p>
+  <p>Shipping and taxes are not calculated in this demo.</p>
+  <a class="hero-cta" href="checkout.html">Continue to Checkout →</a>
+</dialog>
+
+<p class="toast" id="announcement" role="status" aria-live="polite"></p>
+</body>
+</html>

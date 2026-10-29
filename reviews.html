@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews — Pretty Useless Club</title>
+  <meta name="description" content="See what customers say about Pretty Useless Club's emotional support toys and stress-relief clickers.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="style.css" rel="stylesheet">
+  <style>
+    /* ==================== GOOGLE FONTS & DESIGN TOKENS ==================== */
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,400&display=swap');
+
+    :root {
+      --color-cream: #FFF9F0;
+      --color-butter: #F6D66B;
+      --color-butter-dark: #E4C04B;
+      --color-blush: #F6C9D3;
+      --color-lilac: #DCD5FA;
+      --color-mint: #CDE7D7;
+      --color-cocoa: #493B35;
+      --color-cocoa-light: #6B5B53;
+      --color-white: #FFFFFF;
+      --color-shadow: rgba(73, 59, 53, 0.08);
+
+      --font-heading: 'Fredoka', 'Trebuchet MS', sans-serif;
+      --font-body: 'Nunito Sans', 'Segoe UI', sans-serif;
+
+      --nav-height: 80px;
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 32px;
+      --radius-pill: 999px;
+
+      --transition-fast: 0.2s ease;
+      --transition-base: 0.3s ease;
+      --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-cocoa);
+      background: var(--color-cream);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--color-cocoa);
+    }
+
+    /* Page Header */
+    .reviews-page .page-header {
+      background: linear-gradient(180deg, var(--color-lilac) 0%, var(--color-cream) 100%);
+    }
+
+    /* ==================== FILTER PILLS ==================== */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .filter-pill {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 10px 24px;
+      border-radius: var(--radius-pill);
+      background: var(--color-white);
+      color: var(--color-cocoa);
+      border: 2px solid rgba(73, 59, 53, 0.08);
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--color-shadow);
+      transition: all var(--transition-fast);
+    }
+
+    .filter-pill:hover {
+      background: var(--color-butter);
+      transform: translateY(-2px);
+    }
+
+    .filter-pill.active {
+      background: var(--color-butter);
+      border-color: var(--color-butter-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(246, 214, 107, 0.45);
+    }
+
+    /* ==================== REVIEWS GRID ==================== */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .review-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 2px solid rgba(73, 59, 53, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition-bounce), box-shadow var(--transition-base), opacity 0.3s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(73, 59, 53, 0.1);
+    }
+
+    .review-card > div:first-child {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .review-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      width: 100%;
+    }
+
+    .review-stars {
+      color: var(--color-butter-dark);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Half Star Support */
+    .half-star {
+      position: relative;
+      display: inline-block;
+      color: #E2DBD4;
+    }
+
+    .half-star::before {
+      content: '★';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50%;
+      overflow: hidden;
+      color: var(--color-butter-dark);
+    }
+
+    .empty-star {
+      color: #E2DBD4;
+    }
+
+    .review-tag {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--color-cream);
+      color: var(--color-cocoa-light);
+      border: 1px solid rgba(73, 59, 53, 0.08);
+      white-space: nowrap;
+    }
+
+    .review-photo {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+      border: 1px solid rgba(73, 59, 53, 0.08);
+      display: block;
+      cursor: zoom-in;
+      transition: transform var(--transition-fast);
+    }
+
+    .review-photo:hover {
+      transform: scale(1.02);
+    }
+
+    .review-text {
+      font-size: 1rem;
+      color: var(--color-cocoa);
+      margin-bottom: 22px;
+      line-height: 1.65;
+      display: block;
+      width: 100%;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(73, 59, 53, 0.06);
+      width: 100%;
+    }
+
+    .reviewer-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-cocoa);
+      flex-shrink: 0;
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-cocoa);
+    }
+
+    .reviewer-title {
+      font-size: 0.8rem;
+      color: var(--color-cocoa-light);
+    }
+
+    /* ==================== UGC GALLERY ==================== */
+    .ugc-section {
+      margin-top: 80px;
+      padding-top: 60px;
+      border-top: 2px dashed rgba(73, 59, 53, 0.1);
+      text-align: center;
+    }
+
+    .ugc-header {
+      margin-bottom: 36px;
+    }
+
+    .ugc-header h2 {
+      font-size: clamp(2rem, 4.5vw, 2.6rem);
+      margin-bottom: 8px;
+    }
+
+    .ugc-header p a {
+      color: var(--color-cocoa);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: color var(--transition-fast);
+    }
+
+    .ugc-header p a:hover {
+      color: var(--color-butter-dark);
+    }
+
+    .ugc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .ugc-card {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-white);
+      border: 3px solid var(--color-white);
+      box-shadow: 0 8px 24px var(--color-shadow);
+      cursor: zoom-in;
+      transition: transform var(--transition-bounce), box-shadow var(--transition-base);
+    }
+
+    .ugc-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(73, 59, 53, 0.14);
+    }
+
+    .ugc-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .ugc-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .ugc-handle {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(73, 59, 53, 0.88);
+      color: var(--color-white);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+
+    /* ==================== SHARE YOUR EXPERIENCE ==================== */
+    .share-section {
+      margin-top: 80px;
+      padding-top: 60px;
+      border-top: 2px dashed rgba(73, 59, 53, 0.1);
+    }
+
+    .share-container {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .share-container h2 {
+      font-size: clamp(2rem, 4.5vw, 2.6rem);
+      margin-bottom: 12px;
+    }
+
+    .share-container p {
+      color: var(--color-cocoa-light);
+      font-size: 1.05rem;
+      margin-bottom: 32px;
+    }
+
+    .share-card {
+      background: var(--color-white);
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      border: 2px solid rgba(73, 59, 53, 0.06);
+      box-shadow: 0 12px 40px rgba(73, 59, 53, 0.08);
+      text-align: left;
+    }
+
+    .rating-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .rating-score-pill {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--color-cocoa);
+      background: var(--color-butter);
+      padding: 3px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-butter-dark);
+    }
+
+    .star-rating-select {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .star-slot {
+      position: relative;
+      font-size: 2.1rem;
+      line-height: 1;
+      color: #E2DBD4;
+      display: inline-block;
+      transition: transform var(--transition-fast);
+    }
+
+    .star-slot:hover {
+      transform: scale(1.15);
+    }
+
+    .star-slot .star-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      overflow: hidden;
+      color: var(--color-butter-dark);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .star-slot.full .star-fill {
+      width: 100%;
+    }
+
+    .star-slot.half .star-fill {
+      width: 50%;
+    }
+
+    .rating-hint {
+      font-size: 0.82rem;
+      color: var(--color-cocoa-light);
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-cocoa);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-cocoa);
+      background: var(--color-cream);
+      border: 2px solid rgba(73, 59, 53, 0.06);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: all var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-butter);
+      background: var(--color-white);
+      box-shadow: 0 0 0 4px rgba(246, 214, 107, 0.25);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-success-banner {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-align: center;
+      background: rgba(205, 231, 215, 0.5);
+      color: #2F6B4A;
+    }
+
+    /* ==================== LIGHTBOX MODAL ==================== */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(73, 59, 53, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2500;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-container {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 75vh;
+      border-radius: var(--radius-lg);
+      border: 4px solid var(--color-white);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      margin-top: 14px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--color-cream);
+      text-align: center;
+      max-width: 600px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-white);
+      color: var(--color-cocoa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      transition: transform var(--transition-fast), background var(--transition-fast);
+      border: none;
+    }
+
+    .lightbox-close:hover {
+      background: var(--color-butter);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .ugc-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      .share-card {
+        padding: 24px;
+      }
+      .lightbox-close {
+        top: -12px;
+        right: -12px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body class="reviews-page">
+
+  <!-- SVG Mascot -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="egg-mascot" viewBox="0 0 100 120">
+      <path d="M50 8 C 76 8, 92 34, 92 66 C 92 96, 73 116, 50 116 C 27 116, 8 96, 8 66 C 8 34, 24 8, 50 8 Z" fill="#FFF9F0" stroke="#493B35" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <circle cx="36" cy="63" fill="#493B35" r="5"/>
+      <circle cx="64" cy="63" fill="#493B35" r="5"/>
+      <path d="M 45 73 Q 50 79 55 73" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="M 28 40 Q 25 52 26 60" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="M 32 32 Q 30 36 31 40" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    </symbol>
+  </svg>
+
+  <!-- Universal Navigation Bar -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a aria-label="Pretty Useless Club home" class="nav-logo" href="index.html">
+        <svg aria-hidden="true" class="nav-logo-img" viewBox="0 0 100 120">
+          <use href="#egg-mascot"></use>
+        </svg>
+        <span>Pretty Useless Club</span>
+      </a>
+      <div class="nav-actions">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a class="active" href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button aria-label="Shopping cart" class="cart-btn" id="cartBtn">
+          <svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22">
+            <path d="M6 6h15l-1.5 9h-12z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="18" cy="20" r="1"/>
+            <path d="M6 6L5 3H2"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button aria-expanded="false" aria-label="Toggle menu" class="nav-toggle" id="navToggle">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="24">
+            <line x1="3" x2="21" y1="6" y2="6"/>
+            <line x1="3" x2="21" y1="12" y2="12"/>
+            <line x1="3" x2="21" y1="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <span class="section-label reveal">Community Love</span>
+      <h1 class="reveal reveal-delay-1">What the club is saying.</h1>
+      <p class="reveal reveal-delay-2">Real stress relief from real humans (and maybe a few desk plants).</p>
+    </div>
+  </header>
+
+  <!-- Main Reviews Content -->
+  <main>
+    <section class="section-padding">
+      <div class="container">
+
+        <!-- Category Filters -->
+        <div class="filter-wrapper reveal">
+          <button class="filter-pill active" data-filter="all">All Stories</button>
+          <button class="filter-pill" data-filter="office">Office &amp; School</button>
+          <button class="filter-pill" data-filter="tactile">Tactile &amp; Fidget</button>
+          <button class="filter-pill" data-filter="emotional">Emotional Support</button>
+          <button class="filter-pill" data-filter="other">Other</button>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="reviews-grid" id="reviewsGrid">
+          
+          <!-- 1. Sarah K. (Web Review with Photo) -->
+          <article class="review-card reveal" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Desk Favorite</span>
+              </div>
+              <img src="sarah.jpg" alt="3 Sushi Cat Clickers on office desk" class="review-photo zoomable" data-caption="Sarah K. — 3 Sushi Cat Clickers on an office desk" loading="lazy">
+              <p class="review-text">“Obsessed with these cat sushi keychains! The little clicker button makes such a crisp sound every time I press it??so satisfying. My favorite is the salmon roll cat; it??s tiny, squishy and way too cute to handle. Already ordered a second set for my cat-lover bestie!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-blush), #EEB0BC);">SK</div>
+              <div>
+                <div class="reviewer-name">Sarah K.</div>
+                <div class="reviewer-title">Verified Buyer · Clicky Bento</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. @chenkattie (Instagram Office Stress) -->
+          <article class="review-card reveal reveal-delay-1" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Workplace MVP</span>
+              </div>
+              <p class="review-text">“Having this stress-relief button blindbox is amazing! In the office when my boss annoys me or meetings are boring, I can frantically click it under the desk—hearing the ding-ding sound releases so much stress!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">CK</div>
+              <div>
+                <div class="reviewer-name">@chenkattie</div>
+                <div class="reviewer-title">Office Worker · Central</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. @hardy.mp4 (Instagram Commute Therapy) -->
+          <article class="review-card reveal reveal-delay-2" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Daily Therapy</span>
+              </div>
+              <p class="review-text">“I work in Central, and whenever things get overwhelming, taking the tram has always been my personal emotional therapy. Turning the ding-ding into a little pocket stress-relief clicker is so meaningful.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-mint), #A8D5B9);">HM</div>
+              <div>
+                <div class="reviewer-name">@hardy.mp4</div>
+                <div class="reviewer-title">Commuter · Sai Wan</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Jessica L. (Base File Desk Toy) -->
+          <article class="review-card reveal" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Desk Companion</span>
+              </div>
+              <p class="review-text">“I keep the Cupcat Clicker in my desk drawer. Bad meeting? Click click. Deadlines? Click click. It’s genuinely therapeutic without irritating my desk neighbors.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">JL</div>
+              <div>
+                <div class="reviewer-name">Jessica L.</div>
+                <div class="reviewer-title">Marketing Manager · Central</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Mike B. (Web Review) -->
+          <article class="review-card reveal reveal-delay-1" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Crisp Sound</span>
+              </div>
+              <p class="review-text">“These cat sushi keychains slap. Crisp button sound, no weird plastic aftertaste, and the designs aren't overly cutesy - perfect for my bags. The ebi sushi cat with the tiny shrimp tail is my go-to; its subtle but fun. Great for anyone who loves cats and doesn't want something too flashy.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-mint), #A8D5B9);">MB</div>
+              <div>
+                <div class="reviewer-name">Mike B.</div>
+                <div class="reviewer-title">Verified Buyer · Daily Carry</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Wai (Web Review) -->
+          <article class="review-card reveal reveal-delay-2" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Family Favorite</span>
+              </div>
+              <p class="review-text">“Since I am a cat parent, I simply cant resist any cute cat-themed stuff. This 9-piece set was the first one I grabbed. As soon as I got the package, my mom and sister swiped a few of them right away. My absolute favorite is the shrimp one??how can a tiny shrimp tail be this adorable?!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-lilac), #C4B5F0);">W</div>
+              <div>
+                <div class="reviewer-name">Wai</div>
+                <div class="reviewer-title">Cat Parent · Deluxe Set</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. Winnie N. (Base Review) -->
+          <article class="review-card reveal" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Office Secret</span>
+              </div>
+              <p class="review-text">“The whole website is adorable, but the clicker game is dangerously addictive. I hit 200 clicks in one meeting.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, #DCD5FA, #F6C9D3);">WN</div>
+              <div>
+                <div class="reviewer-name">Winnie N.</div>
+                <div class="reviewer-title">Account Manager · Wan Chai</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. Bing W. (Web Review with Photo) -->
+          <article class="review-card reveal reveal-delay-1" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Tactile Click</span>
+              </div>
+              <img src="bing.jpg" alt="Siu Mai Clicky Keychain in hand" class="review-photo zoomable" data-caption="Bing W. — Siu Mai Dim Sum Clicky Keychain" loading="lazy">
+              <p class="review-text">“Can't stop click it, so satisfying. The Siu Mai dim sum design is so detailed and the click feedback feels like a high-end mechanical key switch!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">BW</div>
+              <div>
+                <div class="reviewer-name">Bing W.</div>
+                <div class="reviewer-title">Verified Buyer · Siu Mai Keychain</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9. Coolcat (Web Review) -->
+          <article class="review-card reveal reveal-delay-2" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Tactile ASMR</span>
+              </div>
+              <p class="review-text">“Obsessed with these! Cat + sushi designs, satisfying crisp clicks. The tactile switch has the most addicting snap.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-lilac), #C4B5F0);">CC</div>
+              <div>
+                <div class="reviewer-name">Coolcat</div>
+                <div class="reviewer-title">Verified Collector · Deluxe Set</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10. @phillyjayssteaks & Kee (IG / Web Sensory Review) -->
+          <article class="review-card reveal" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Sensory Calm</span>
+              </div>
+              <p class="review-text">“My ADHD self genuinely needs these. Tiny cat sushi keychains with a crisp button sound! The little clicker button makes the most addictive sound every time I press it.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), var(--color-blush));">PK</div>
+              <div>
+                <div class="reviewer-name">@phillyjayssteaks &amp; Kee</div>
+                <div class="reviewer-title">Daily Fidgeters · Community</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 11. Celine (Web Review with Photo) -->
+          <article class="review-card reveal reveal-delay-1" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Pocket Joy</span>
+              </div>
+              <img src="celine.jpg" alt="Sushi cat bento collection" class="review-photo zoomable" data-caption="Celine — Sushi Cat Bento Keychains Set" loading="lazy">
+              <p class="review-text">“Such a cute collection, with a lot of details on the texture and sushi. Love this concept and that I can carry around as keychains. Thank you for the fun creation!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-mint), #A8D5B9);">C</div>
+              <div>
+                <div class="reviewer-name">Celine</div>
+                <div class="reviewer-title">Verified Buyer · Clicky Bento</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 12. Ming K. (Base File Review) -->
+          <article class="review-card reveal reveal-delay-2" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Collab Set</span>
+              </div>
+              <p class="review-text">“The Ding Ding Squad set is so detailed! Brought one to the office and now everyone wants to know where I got it. The mechanical feedback is so satisfying.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-lilac), #C4B5F0);">MK</div>
+              <div>
+                <div class="reviewer-name">Ming K.</div>
+                <div class="reviewer-title">Designer · Kowloon</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 13. Dav (Web Review) -->
+          <article class="review-card reveal" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Everyday Carry</span>
+              </div>
+              <p class="review-text">“These cat sushi keychains slap. Crisp click, adorable looks, clipped one to my washingbag immediately.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">D</div>
+              <div>
+                <div class="reviewer-name">Dav</div>
+                <div class="reviewer-title">Verified Buyer · Clicky Tuna</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 14. Sam C. (Base Review) -->
+          <article class="review-card reveal reveal-delay-1" data-category="tactile">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Lecture Fidget</span>
+              </div>
+              <p class="review-text">“My Peach Bun Squish smells amazing and the slow-rise texture is perfect for anxious fidgeting during lectures.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-blush), #EEB0BC);">SC</div>
+              <div>
+                <div class="reviewer-name">Sam C.</div>
+                <div class="reviewer-title">Student · CUHK</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 15. Pat (Web Review with Photo) -->
+          <article class="review-card reveal reveal-delay-2" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Mood Cured</span>
+              </div>
+              <img src="pat.jpg" alt="Egg MEOW family bundle in carton" class="review-photo zoomable" data-caption="Pat — Egg MEOW Family Bundle in Egg Carton" loading="lazy">
+              <p class="review-text">“I got this for both of my besties. Looking at these cat x egg heads is so cured! They bring so much comfort just sitting on our desks.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-blush), #EEB0BC);">P</div>
+              <div>
+                <div class="reviewer-name">Pat</div>
+                <div class="reviewer-title">Verified Buyer · Egg MEOW Bundle</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 16. Edward Lim (Web Review with Photo) -->
+          <article class="review-card reveal" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Desk Companion</span>
+              </div>
+              <img src="edward.jpg" alt="Clicky Salmon sushi cat toy" class="review-photo zoomable" data-caption="Edward Lim — Clicky Salmon Sushi Cat Toy" loading="lazy">
+              <p class="review-text">“Now I regret getting only the single, it looks lonely and I need to get him some friends. Carrying this little salmon buddy around brings unexpected calm.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">EL</div>
+              <div>
+                <div class="reviewer-name">Edward Lim</div>
+                <div class="reviewer-title">Verified Buyer · Clicky Salmon</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 17. Adeline T. (Web Review with Photo) -->
+          <article class="review-card reveal reveal-delay-1" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Gift of Comfort</span>
+              </div>
+              <img src="adeline.jpg" alt="Sushi cat toys in authentic bento boxes" class="review-photo zoomable" data-caption="Adeline T. — Sushi Cat Deluxe Collector Bento Boxes" loading="lazy">
+              <p class="review-text">“They came in actual sushi boxes, so adorable and beyond my expectation! Happy sharing these cute clicky keychains with my friends.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), #F9E28A);">AT</div>
+              <div>
+                <div class="reviewer-name">Adeline T.</div>
+                <div class="reviewer-title">Verified Buyer · Deluxe Set</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 18. Tomtom (Web Review with Photo) -->
+          <article class="review-card reveal reveal-delay-2" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Daily Comfort</span>
+              </div>
+              <img src="tomtom.jpg" alt="Xiao Long Bao clicky keychains in mini steamers" class="review-photo zoomable" data-caption="Tomtom — Xiao Long Bao Soup Dumpling Clicky Keychains" loading="lazy">
+              <p class="review-text">“How cute to wear the most tasty buns with me everyday. Cant wait to Shanghai again this winter! The smiling dumpling face is instant serotonin.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-mint), #A8D5B9);">TT</div>
+              <div>
+                <div class="reviewer-name">Tomtom</div>
+                <div class="reviewer-title">Verified Buyer · Xiao Long Bao</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 19. Mei W. (Web Review with Photo) -->
+          <article class="review-card reveal" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Nostalgic Heart</span>
+              </div>
+              <img src="mei.jpg" alt="Birthday bun clicky set in carton" class="review-photo zoomable" data-caption="Mei W. — Birthday Bun Clicky Set" loading="lazy">
+              <p class="review-text">“Reminds me of those days I stay with my grandparents, I miss those tasty sticky rice buns. Seeing these little buns sitting on my table warms my heart.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-blush), #EEB0BC);">MW</div>
+              <div>
+                <div class="reviewer-name">Mei W.</div>
+                <div class="reviewer-title">Verified Buyer · Birthday Bun Set</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 20. @janiceng_jn (Instagram Emotional Relief) -->
+          <article class="review-card reveal reveal-delay-1" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Emotional Support</span>
+              </div>
+              <p class="review-text">“Heartfelt thanks for designing such great products. For those of us dealing with long-term emotional distress, this is a huge help. Now I bring my companion toy out with me every single day!”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, #DCD5FA, #F6C9D3);">JN</div>
+              <div>
+                <div class="reviewer-name">@janiceng_jn</div>
+                <div class="reviewer-title">Club Member · Hong Kong</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 21. Avery T. (Base File Review) -->
+          <article class="review-card reveal reveal-delay-2" data-category="office">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Study Companion</span>
+              </div>
+              <p class="review-text">“Bought the Egg Buddy for the HKU library. Having it on my desk keeps my anxious fidgeting at bay during long revisions. It’s just so... round and friendly.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-mint), #A8D5B9);">AT</div>
+              <div>
+                <div class="reviewer-name">Avery T.</div>
+                <div class="reviewer-title">Student · HKU</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 22. Thomas H. (Base Review) -->
+          <article class="review-card reveal" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Tram Nostalgia</span>
+              </div>
+              <p class="review-text">“As a tram lover, the HK Tramways collab made me cry a little. Such a thoughtful, local design.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), var(--color-blush));">TH</div>
+              <div>
+                <div class="reviewer-name">Thomas H.</div>
+                <div class="reviewer-title">Architect · Mid-Levels</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 23. Daniel W. (Web Review) -->
+          <article class="review-card reveal reveal-delay-1" data-category="emotional">
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">★★★★★</div>
+                <span class="review-tag">Birthday Gift</span>
+              </div>
+              <p class="review-text">“Got it for my friend's birthday and she loves it. The packaging and design were an instant hit.”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-lilac), #C4B5F0);">DW</div>
+              <div>
+                <div class="reviewer-name">Daniel W.</div>
+                <div class="reviewer-title">Verified Buyer · Birthday Set</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Spotted in the Wild UGC Gallery -->
+        <div class="ugc-section reveal">
+          <div class="ugc-header">
+            <span class="section-label">Community Gallery</span>
+            <h2>Spotted in the Wild</h2>
+            <p>Tag <a href="https://www.instagram.com/prettyuseless.club" target="_blank" rel="noopener">@prettyuseless.club</a> on Instagram to be featured.</p>
+          </div>
+          <div class="ugc-grid">
+            <div class="ugc-card reveal zoomable" data-img="ugc-1.jpg" data-caption="@hktramways — Catch a ride, catch a smile. Pocket-sized Ding Ding on the go.">
+              <img src="ugc-1.jpg" alt="Green HK Tramways clicker on tram window" loading="lazy">
+              <span class="ugc-handle">@hktramways</span>
+            </div>
+            <div class="ugc-card reveal reveal-delay-1 zoomable" data-img="ugc-2.jpg" data-caption="@desk_wellness — Bamboo on desk left: onwards and upwards with stress-free clicking.">
+              <img src="ugc-2.jpg" alt="Lucky bamboo clicker beside laptop" loading="lazy">
+              <span class="ugc-handle">@desk_wellness</span>
+            </div>
+            <div class="ugc-card reveal reveal-delay-2 zoomable" data-img="ugc-3.jpg" data-caption="@comfortdaily — A little daily encouragement at work: “You can do it. I can handle it!”">
+              <img src="ugc-3.jpg" alt="Mascot with You can do it mirror" loading="lazy">
+              <span class="ugc-handle">@comfortdaily</span>
+            </div>
+            <div class="ugc-card reveal reveal-delay-3 zoomable" data-img="ugc-4.jpg" data-caption="@dingding_club — Unboxing the #128 vintage tram blindbox on a calm afternoon.">
+              <img src="ugc-4.jpg" alt="Red antique tram clicker and box" loading="lazy">
+              <span class="ugc-handle">@dingding_club</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Share Your Experience Form Section -->
+        <div class="share-section reveal">
+          <div class="share-container">
+            <span class="section-label">Share the Love</span>
+            <h2>Share Your Experience</h2>
+            <p>How does your Pretty Useless companion help you get through your day? Drop your review below.</p>
+            
+            <form class="share-card" id="shareReviewForm">
+              <div class="form-group">
+                <div class="rating-label-row">
+                  <label style="margin-bottom: 0;">Your Rating</label>
+                  <span class="rating-score-pill" id="ratingScoreText">5.0 / 5.0</span>
+                </div>
+                <div class="star-rating-select" id="starRatingSelect">
+                  <div class="star-slot full" data-index="1">★<span class="star-fill">★</span></div>
+                  <div class="star-slot full" data-index="2">★<span class="star-fill">★</span></div>
+                  <div class="star-slot full" data-index="3">★<span class="star-fill">★</span></div>
+                  <div class="star-slot full" data-index="4">★<span class="star-fill">★</span></div>
+                  <div class="star-slot full" data-index="5">★<span class="star-fill">★</span></div>
+                </div>
+                <input type="hidden" name="rating" id="ratingInput" value="5.0">
+                <div class="rating-hint">Hover or tap the left/right half of any star for 0.5 step ratings (0.5 to 5.0).</div>
+              </div>
+
+              <div class="form-group">
+                <label for="reviewName">Your Name or Instagram Handle</label>
+                <input id="reviewName" name="name" placeholder="e.g. @fidgetfan_hk or Alex L." required type="text">
+              </div>
+
+              <div class="form-group">
+                <label for="reviewCategory">Experience Category</label>
+                <select id="reviewCategory" name="category">
+                  <option value="office">Office &amp; School De-stress</option>
+                  <option value="tactile">Tactile &amp; Fidget ASMR</option>
+                  <option value="emotional">Emotional Support &amp; Mood</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="reviewMessage">Your Story</label>
+                <textarea id="reviewMessage" name="message" placeholder="Tell us how it feels, when you click it, or how it helps your day..." required></textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit" style="width: 100%;">Post Review</button>
+              <div class="form-success-banner" id="formSuccessBanner">Thank you for sharing your useless comfort story! ✨</div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="footer-brand" href="index.html">
+            <svg aria-hidden="true" viewBox="0 0 100 120">
+              <use href="#egg-mascot"></use>
+            </svg>
+            Pretty Useless Club
+          </a>
+          <p>Emotional support toys for overworked souls. Made with useless love in Hong Kong.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="products.html">New Arrivals</a></li>
+            <li><a href="products.html">Limited Editions</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a class="active" href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Follow</h4>
+          <div class="social-links">
+            <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/prettyuseless.club/?hl=en" target="_blank" rel="noopener">
+              <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+                <rect height="20" rx="5" ry="5" width="20" x="2" y="2"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Pretty Useless Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="lightbox-container">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close image preview">&times;</button>
+      <img src="" alt="" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ==================== FILTERING LOGIC ====================
+      const filterPills = document.querySelectorAll('.filter-pill');
+      const reviewCards = document.querySelectorAll('.review-card');
+
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+
+          const category = pill.getAttribute('data-filter');
+          reviewCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (category === 'all' || cardCategory === category) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // ==================== 0.5 INTERVAL STAR PICKER ====================
+      const starSlots = document.querySelectorAll('.star-slot');
+      const ratingInput = document.getElementById('ratingInput');
+      const ratingScoreText = document.getElementById('ratingScoreText');
+      const starContainer = document.getElementById('starRatingSelect');
+      let currentRating = 5.0;
+
+      function updateStarDisplay(rating) {
+        starSlots.forEach(slot => {
+          const index = parseFloat(slot.getAttribute('data-index'));
+          slot.classList.remove('full', 'half');
+          if (index <= rating) {
+            slot.classList.add('full');
+          } else if (index - 0.5 === rating) {
+            slot.classList.add('half');
+          }
+        });
+        if (ratingScoreText) {
+          ratingScoreText.textContent = rating.toFixed(1) + ' / 5.0';
+        }
+        if (ratingInput) {
+          ratingInput.value = rating.toFixed(1);
+        }
+      }
+
+      function getRatingFromEvent(e, slot) {
+        const rect = slot.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const isLeftHalf = offsetX < (rect.width / 2);
+        const index = parseFloat(slot.getAttribute('data-index'));
+        return isLeftHalf ? (index - 0.5) : index;
+      }
+
+      starSlots.forEach(slot => {
+        slot.addEventListener('mousemove', (e) => {
+          const previewRating = getRatingFromEvent(e, slot);
+          updateStarDisplay(previewRating);
+        });
+
+        slot.addEventListener('click', (e) => {
+          currentRating = getRatingFromEvent(e, slot);
+          updateStarDisplay(currentRating);
+        });
+      });
+
+      if (starContainer) {
+        starContainer.addEventListener('mouseleave', () => {
+          updateStarDisplay(currentRating);
+        });
+      }
+
+      // ==================== STAR HTML RENDERER ====================
+      function renderStarsHTML(score) {
+        let starsHTML = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= score) {
+            starsHTML += '★';
+          } else if (i - 0.5 === score) {
+            starsHTML += '<span class="half-star">★</span>';
+          } else {
+            starsHTML += '<span class="empty-star">★</span>';
+          }
+        }
+        return starsHTML;
+      }
+
+      // ==================== DYNAMIC REVIEW SUBMISSION ====================
+      const form = document.getElementById('shareReviewForm');
+      const banner = document.getElementById('formSuccessBanner');
+      const reviewsGrid = document.getElementById('reviewsGrid');
+
+      const categoryTagMap = {
+        office: 'Office & School',
+        tactile: 'Tactile ASMR',
+        emotional: 'Emotional Support',
+        other: 'Community Story'
+      };
+
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById('reviewName').value.trim();
+          const category = document.getElementById('reviewCategory').value;
+          const story = document.getElementById('reviewMessage').value.trim();
+          const score = parseFloat(ratingInput.value) || 5.0;
+
+          const initials = name.replace('@', '').slice(0, 2).toUpperCase() || 'PU';
+          const badgeText = categoryTagMap[category] || 'Community Review';
+
+          const newCard = document.createElement('article');
+          newCard.className = 'review-card reveal';
+          newCard.setAttribute('data-category', category);
+
+          newCard.innerHTML = `
+            <div>
+              <div class="review-card-top">
+                <div class="review-stars">${renderStarsHTML(score)}</div>
+                <span class="review-tag">${badgeText}</span>
+              </div>
+              <p class="review-text">“${story}”</p>
+            </div>
+            <div class="reviewer">
+              <div class="reviewer-avatar" style="background:linear-gradient(135deg, var(--color-butter), var(--color-mint))">${initials}</div>
+              <div>
+                <div class="reviewer-name">${name}</div>
+                <div class="reviewer-title">Verified Member · Just now</div>
+              </div>
+            </div>
+          `;
+
+          reviewsGrid.prepend(newCard);
+
+          banner.style.display = 'block';
+          form.reset();
+          currentRating = 5.0;
+          updateStarDisplay(5.0);
+
+          setTimeout(() => {
+            banner.style.display = 'none';
+          }, 4500);
+        });
+      }
+
+      // ==================== LIGHTBOX MODAL LOGIC ====================
+      const modal = document.getElementById('lightboxModal');
+      const modalImg = document.getElementById('lightboxImg');
+      const modalCaption = document.getElementById('lightboxCaption');
+      const closeBtn = document.getElementById('lightboxClose');
+
+      function openLightbox(src, caption, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt || 'Preview image';
+        modalCaption.textContent = caption || '';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          modalImg.src = '';
+          modalCaption.textContent = '';
+        }, 200);
+      }
+
+      // Review Photos Zoom
+      document.querySelectorAll('.review-photo.zoomable').forEach(photo => {
+        photo.addEventListener('click', () => {
+          const src = photo.getAttribute('src');
+          const caption = photo.getAttribute('data-caption');
+          openLightbox(src, caption, photo.alt);
+        });
+      });
+
+      // UGC Photos Zoom
+      document.querySelectorAll('.ugc-card.zoomable').forEach(card => {
+        card.addEventListener('click', () => {
+          const src = card.getAttribute('data-img');
+          const caption = card.getAttribute('data-caption');
+          const img = card.querySelector('img');
+          openLightbox(src, caption, img ? img.alt : '');
+        });
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeLightbox();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

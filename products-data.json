@@ -1,0 +1,112 @@
+[
+  {
+    "id": "tram",
+    "title": "HK Tram Clicker Blind Box",
+    "variants": [
+      {
+        "label": "Single(random)",
+        "price": 94.46,
+        "usd": 12.11,
+        "available": true
+      },
+      {
+        "label": "Full Set(4 boxes)",
+        "price": 377.68,
+        "usd": 48.42,
+        "available": true
+      }
+    ],
+    "image": "assets/tram.jpg",
+    "url": "https://www.prettyuseless.club/products/my-emotional-support-hk-tram-clicker-blind-box-香港電車-clicker-盲盒"
+  },
+  {
+    "id": "workcat",
+    "title": "Working Cat Blind Box",
+    "variants": [
+      {
+        "label": "Single(Random)",
+        "price": 62.4,
+        "usd": 8.0,
+        "available": true
+      },
+      {
+        "label": "Full set(8 toys)",
+        "price": 499.2,
+        "usd": 64.0,
+        "available": true
+      }
+    ],
+    "image": "assets/workcat.jpg",
+    "url": "https://www.prettyuseless.club/products/my-emotional-support-working-cat-blind-box"
+  },
+  {
+    "id": "snack",
+    "title": "HK Snack Clicker Blind Box",
+    "variants": [
+      {
+        "label": "Single (Random)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "Full Set (6 Toy)",
+        "price": 374.4,
+        "usd": 48.0,
+        "available": true
+      }
+    ],
+    "image": "assets/snack.jpg",
+    "url": "https://www.prettyuseless.club/products/emotional-support-hk-snack-clicker-blindbox"
+  },
+  {
+    "id": "clicker",
+    "title": "Hong Kong and Macau Clicker",
+    "variants": [
+      {
+        "label": "香港・燒賣 (Hong Kong · Siu Mai)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "開心・咖喱魚蛋 (Happy · Curry Fish Balls)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "九龍・菠蘿油(Kowloon · Pineapple Bun with Butter)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "香港・雞蛋仔 (Hong Kong · Egg Waffle)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "澳門・葡撻 (Macau · Portuguese Egg Tart)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "澳門・777(Macau · 777)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      },
+      {
+        "label": "澳門・發達啦(Macau · Get Rich!)",
+        "price": 66.3,
+        "usd": 8.5,
+        "available": true
+      }
+    ],
+    "image": "assets/clicker.jpg",
+    "url": "https://www.prettyuseless.club/products/emotional-support-hongkong-macau-clicker-香港-澳門特色解壓按鈕"
+  }
+]

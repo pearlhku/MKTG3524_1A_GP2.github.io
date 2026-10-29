@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Pretty Useless Club</title>
+  <meta name="description" content="Meet Pretty Useless Club, a Hong Kong-born brand bringing playful clicker toys, desk companions, and small moments of joy to everyday life.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="style.css" rel="stylesheet">
+  <link href="about.css" rel="stylesheet">
+</head>
+<body class="puc-about-page">
+
+  <a class="puc-about-skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Shared SVG symbols -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="egg-mascot" viewBox="0 0 100 120">
+      <path d="M50 8 C 76 8, 92 34, 92 66 C 92 96, 73 116, 50 116 C 27 116, 8 96, 8 66 C 8 34, 24 8, 50 8 Z" fill="#FFF9F0" stroke="#493B35" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <circle cx="36" cy="63" fill="#493B35" r="5"/>
+      <circle cx="64" cy="63" fill="#493B35" r="5"/>
+      <path d="M 45 73 Q 50 79 55 73" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="M 28 40 Q 25 52 26 60" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="M 32 32 Q 30 36 31 40" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    </symbol>
+  </svg>
+
+  <!-- ==================== NAVIGATION (shared) ==================== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a aria-label="Pretty Useless Club home" class="nav-logo" href="index.html">
+        <svg aria-hidden="true" class="nav-logo-img" viewBox="0 0 100 120">
+          <use href="#egg-mascot"></use>
+        </svg>
+        <span>Pretty Useless Club</span>
+      </a>
+      <div class="nav-actions">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a class="active" aria-current="page" href="about.html">About Us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+        <button aria-label="Shopping cart" class="cart-btn" id="cartBtn">
+          <svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="22">
+            <path d="M6 6h15l-1.5 9h-12z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="18" cy="20" r="1"/>
+            <path d="M6 6L5 3H2"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button aria-expanded="false" aria-label="Toggle menu" class="nav-toggle" id="navToggle">
+          <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24" width="24">
+            <line x1="3" x2="21" y1="6" y2="6"/>
+            <line x1="3" x2="21" y1="12" y2="12"/>
+            <line x1="3" x2="21" y1="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ==================== A. ABOUT HERO ==================== -->
+    <section class="puc-about-hero">
+      <div class="puc-about-hero-grid">
+        <div>
+          <span class="puc-about-eyebrow">About the Club</span>
+          <h1>Small clicks.<br><span class="accent">A little more joy.</span></h1>
+          <p class="puc-about-hero-intro">Meet Pretty Useless Club — a Hong Kong-born brand bringing playful design and small moments of comfort to everyday life.</p>
+          <p class="puc-about-hero-note">Clicker toys, desk companions, and a little reminder that not everything needs to be useful.</p>
+          <div class="puc-about-hero-actions">
+            <a class="btn btn-primary" href="#our-story">
+              Discover our story
+              <svg aria-hidden="true" class="arrow" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18">
+                <line x1="5" x2="19" y1="12" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+            <a class="puc-about-cta-secondary" href="products.html">Explore the clickers</a>
+          </div>
+          <p class="puc-about-hero-tagline">A little useless. A lot of comfort.</p>
+        </div>
+        <div class="puc-about-hero-visual">
+          <figure class="puc-about-hero-photo">
+            <img src="assets/ugc-2.jpg" alt="A small green bamboo-shaped desk toy sitting in a smiling brown pot beside a laptop" width="1031" height="1031">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== B. OUR STORY ==================== -->
+    <section class="puc-about-section puc-about-story" id="our-story">
+      <div class="puc-about-story-grid">
+        <figure class="puc-about-story-photo">
+          <img src="assets/ugc-3.jpg" alt="A small white character toy looking into a mirror with an encouraging message" loading="lazy" width="1170" height="1170">
+        </figure>
+        <div class="puc-about-story-copy">
+          <span class="puc-about-eyebrow">Our Story</span>
+          <h2>A playful pause in a busy world.</h2>
+          <p>Life moves quickly. Between work, study, and everything else, there is not always much room to pause.</p>
+          <p>Pretty Useless Club brings a playful response to that everyday rush: small objects with character, cute details, and a satisfying click.</p>
+          <p>They may not finish your to-do list. But they can bring a little personality to your desk, your bag, and the moments in between.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== C. THE JOURNEY ==================== -->
+    <section class="puc-about-section puc-about-journey">
+      <div class="puc-about-section-header">
+        <span class="puc-about-eyebrow">From Idea to Everyday Companion</span>
+        <h2>The thinking behind the little things.</h2>
+      </div>
+      <ol class="puc-about-timeline">
+        <li class="puc-about-step">
+          <div class="puc-about-step-number" aria-hidden="true"></div>
+          <div>
+            <h3>Start with the everyday</h3>
+            <p>A familiar object, a local detail, or a moment from daily life can be the beginning of something playful.</p>
+          </div>
+        </li>
+        <li class="puc-about-step">
+          <div class="puc-about-step-number" aria-hidden="true"></div>
+          <div>
+            <h3>Add a little character</h3>
+            <p>Friendly forms and expressive details give each little companion a personality of its own.</p>
+          </div>
+        </li>
+        <li class="puc-about-step">
+          <div class="puc-about-step-number" aria-hidden="true"></div>
+          <div>
+            <h3>Make room for play</h3>
+            <p>A place on your desk. A moment between tasks. A small invitation to pause and enjoy something simple.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ==================== D. HONG KONG DESIGN FEATURE ==================== -->
+    <section class="puc-about-section puc-about-hk">
+      <div class="puc-about-hk-grid">
+        <figure class="puc-about-hk-photo">
+          <img src="assets/ugc-1.png" alt="A close-up of a small green Hong Kong tram toy held in a hand" loading="lazy" width="1170" height="1170">
+        </figure>
+        <div class="puc-about-hk-copy">
+          <span class="puc-about-eyebrow">A Little Local Character</span>
+          <h2>Familiar city. Playful perspective.</h2>
+          <p>Our tram collection brings a familiar Hong Kong silhouette into a smaller, more playful form — a little piece of city character for everyday spaces.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== E. OUR PHILOSOPHY ==================== -->
+    <section class="puc-about-section puc-about-philosophy">
+      <div class="puc-about-section-header">
+        <span class="puc-about-eyebrow">What We Believe</span>
+        <h2>Less pressure. More play.</h2>
+      </div>
+      <div class="puc-about-philosophy-grid">
+        <div class="puc-about-value-card puc-about-value-blush">
+          <div class="puc-about-value-icon" aria-hidden="true">
+            <svg fill="none" height="26" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="26">
+              <circle cx="12" cy="12" r="9"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="12" cy="12" r="1"/>
+            </svg>
+          </div>
+          <h3>Small moments matter</h3>
+          <p>A little pause. A familiar shape. Something that makes you smile. Everyday joy does not have to be complicated.</p>
+        </div>
+        <div class="puc-about-value-card puc-about-value-lilac">
+          <div class="puc-about-value-icon" aria-hidden="true">
+            <svg fill="none" height="26" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="26">
+              <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/>
+              <circle cx="12" cy="12" r="4"/>
+            </svg>
+          </div>
+          <h3>Play belongs everywhere</h3>
+          <p>Not just on weekends. A little personality can belong on your desk, in your bag, and between the serious parts of life.</p>
+        </div>
+        <div class="puc-about-value-card puc-about-value-mint">
+          <div class="puc-about-value-icon" aria-hidden="true">
+            <svg fill="none" height="26" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="26">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Joy is reason enough</h3>
+          <p>Not everything needs to make you faster or more productive. Sometimes, enjoying it is enough.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== F. CLOSING CTA ==================== -->
+    <section class="puc-about-cta">
+      <div class="puc-about-cta-panel">
+        <h2>Meet your next little desk companion.</h2>
+        <p>Explore the clickers and playful objects waiting to brighten an everyday moment.</p>
+        <div class="puc-about-cta-actions">
+          <a class="btn btn-primary" href="products.html">
+            Explore the collection
+            <svg aria-hidden="true" class="arrow" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18">
+              <line x1="5" x2="19" y1="12" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+          <a class="puc-about-cta-secondary" href="index.html">Back to the fun</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== G. SOURCE NOTE ==================== -->
+    <aside class="puc-about-note">
+      <p>Student concept website. Not the official Pretty Useless Club website.
+        <a href="https://www.prettyuseless.club/pages/about-pretty-useless-club" rel="noopener noreferrer" target="_blank">Learn more about the brand</a>
+      </p>
+    </aside>
+  </main>
+
+  <!-- ==================== SHARED FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a class="footer-brand" href="index.html">
+            <svg aria-hidden="true" viewBox="0 0 100 120">
+              <use href="#egg-mascot"></use>
+            </svg>
+            Pretty Useless Club
+          </a>
+          <p>Emotional support toys for overworked souls. Born in Hong Kong.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="products.html">New Arrivals</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Follow</h4>
+          <div class="social-links">
+            <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/prettyuseless.club/?hl=en" target="_blank" rel="noopener">
+              <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+                <rect height="20" rx="5" ry="5" width="20" x="2" y="2"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+            <a aria-label="Facebook" class="social-link" href="https://share.google/qZFhsxUus5KDBQYdQ" target="_blank" rel="noopener">
+              <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Pretty Useless Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="cart-store.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

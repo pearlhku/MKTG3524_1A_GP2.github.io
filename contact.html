@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Pretty Useless Club</title>
+<meta name="description" content="Get in touch with Pretty Useless Club — questions, collaborations, or just to say meow.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<!-- ══════════ SHARED SVG SYMBOLS ══════════ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="egg-mascot" viewBox="0 0 100 120">
+    <path d="M50 8 C 76 8, 92 34, 92 66 C 92 96, 73 116, 50 116 C 27 116, 8 96, 8 66 C 8 34, 24 8, 50 8 Z" fill="#FFF9F0" stroke="#493B35" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <circle cx="36" cy="63" fill="#493B35" r="5"/>
+    <circle cx="64" cy="63" fill="#493B35" r="5"/>
+    <path d="M 45 73 Q 50 79 55 73" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 28 40 Q 25 52 26 60" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M 32 32 Q 30 36 31 40" fill="none" stroke="#493B35" stroke-linecap="round" stroke-width="3.5"/>
+  </symbol>
+</svg>
+
+<!-- ══════════ NAVIGATION ══════════ -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html" aria-label="Pretty Useless Club home">
+      <svg class="nav-logo-img" viewBox="0 0 100 120" aria-hidden="true"><use href="#egg-mascot"></use></svg>
+      <span>Pretty Useless Club</span>
+    </a>
+    <div class="nav-actions">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a class="active" href="contact.html">Contact</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+      <button class="cart-btn" id="cartBtn" aria-label="Shopping cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/>
+        </svg>
+        <span class="cart-count" id="cartCountNav">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════════ PAGE HEADER ══════════ -->
+  <header class="page-header">
+    <span class="section-label">We'd Love to Hear From You</span>
+    <h1>Contact Us</h1>
+    <p>Questions, collaborations, or just want to say meow? Drop us a line — we reply within 24 hours.</p>
+  </header>
+
+  <div class="contact-layout container">
+
+    <!-- ══════════ LEFT: CONTACT FORM ══════════ -->
+    <section class="card contact-card reveal" style="padding:40px;">
+      <h2 style="margin-bottom:24px;">Send Us a Message</h2>
+
+      <form id="contactForm" novalidate>
+        <div class="field">
+          <label class="field__label" for="cName">Your Name <span class="req" aria-hidden="true">*</span></label>
+          <input class="input" type="text" id="cName" name="name" placeholder="MEOW CAT" required>
+          <p class="field__err" id="cNameErr" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cEmail">Email Address <span class="req" aria-hidden="true">*</span></label>
+          <input class="input" type="email" id="cEmail" name="email" placeholder="you@example.com" required>
+          <p class="field__err" id="cEmailErr" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cSubject">Subject <span class="req" aria-hidden="true">*</span></label>
+          <div class="select-wrap">
+            <select class="input select" id="cSubject" name="subject" required>
+              <option value="">Choose a topic</option>
+              <option value="order">Order Enquiry</option>
+              <option value="shipping">Shipping &amp; Delivery</option>
+              <option value="product">Product Question</option>
+              <option value="collab">Collaboration / Wholesale</option>
+              <option value="press">Press &amp; Media</option>
+              <option value="other">Something Else</option>
+            </select>
+            <span class="select-wrap__chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="m4 6.5 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+          <p class="field__err" id="cSubjectErr" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="cMessage">Your Message <span class="req" aria-hidden="true">*</span></label>
+          <textarea class="input" id="cMessage" name="message" rows="6" placeholder="Tell us what's on your mind..." required style="resize:vertical;min-height:140px;"></textarea>
+          <p class="field__err" id="cMessageErr" role="alert"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn--block" style="margin-top:8px;">Send Message</button>
+      </form>
+    </section>
+
+    <!-- ══════════ RIGHT: CONTACT INFO ══════════ -->
+    <aside class="contact-side reveal reveal-delay-1">
+
+      <!-- Quick contacts -->
+      <div class="card" style="padding:28px;">
+        <h2 style="font-size:1.3rem;margin-bottom:16px;">Reach Us Directly</h2>
+        <ul class="contact-info">
+          <li>
+            <span class="contact-info__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M4 6.5h16v11H4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 7.2 12 13l8-5.8" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:hello@prettyuseless.club">hello@prettyuseless.club</a>
+            </div>
+          </li>
+          <li>
+            <span class="contact-info__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M6.5 4h-3l-1 2 2.5 3.5 3-1.5c1 1.5 2 2.5 3.5 3.5l-1.5 3 3.5 2.5 2-1v-3c-2-1.5-4-3.5-6-5.5S8.5 6 6.5 4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="#">+852 9876 5432</a>
+            </div>
+          </li>
+          <li>
+            <span class="contact-info__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="12" cy="10" r="3.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5C7.3 2.5 4 6.2 4 10.5c0 4.5 6 9.5 8 11 2-1.5 8-6.5 8-11 0-4.3-3.3-8-8-8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <strong>Studio</strong>
+              <span>Sheung Wan, Hong Kong Island<br>By appointment only</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Social -->
+        <div class="contact-social">
+          <h3>Follow Our Journey</h3>
+          <div class="social-links">
+            <a class="social-link" href="https://www.instagram.com/prettyuseless.club/?hl=en" target="_blank" rel="noopener" aria-label="Instagram" style="background:rgba(73,59,53,0.1);color:var(--color-cocoa);">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+            </a>
+            <a class="social-link" href="https://share.google/qZFhsxUus5KDBQYdQ" target="_blank" rel="noopener" aria-label="Facebook" style="background:rgba(73,59,53,0.1);color:var(--color-cocoa);">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M14 8h2.5V4.5H14c-2 0-3.5 1.5-3.5 3.5V10H8v3.5h2.5V21H14v-7.5h2.5L17 10h-3V8.2c0-.7.5-1.2 1-1.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="card" style="padding:28px;">
+        <h2 style="font-size:1.3rem;margin-bottom:16px;">Quick Answers</h2>
+        <details class="faq-item">
+          <summary>How long does shipping take?</summary>
+          <p>Orders ship within 3–5 business days. Hong Kong delivery takes 2–3 days; international 7–14 days depending on destination.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I return or exchange a product?</summary>
+          <p>Yes! Unused items in original packaging can be returned within 14 days for a full refund. <a href="#">See our returns policy</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do you offer wholesale pricing?</summary>
+          <p>We partner with select retailers. Choose "Collaboration / Wholesale" in the subject above and tell us about your shop.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the toys safe for children?</summary>
+          <p>Our clickers are designed as emotional support toys for ages 14+. They contain small parts and are not suitable for young children.</p>
+        </details>
+      </div>
+
+    </aside>
+
+  </div>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <span class="footer-brand">
+          <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#egg-mascot"></use></svg>
+          Pretty Useless Club
+        </span>
+        <p>Quirky emotional support toys from Hong Kong. Click. Chill. Repeat.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="index.html#clicker">Clicker</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Pretty Useless Club. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ══════════ TOAST ══════════ -->
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span class="toast__icon" id="toastIcon">🐾</span>
+  <span class="toast__msg" id="toastMsg"></span>
+</div>
+
+<script src="cart-store.js"></script>
+<script>
+// Contact form validation + submit
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const toast = (msg) => {
+    const el = $('#toast');
+    if (!el) return;
+    $('#toastMsg').textContent = msg;
+    $('#toastIcon').textContent = '🐾';
+    el.hidden = false;
+    requestAnimationFrame(() => el.classList.add('is-open'));
+    setTimeout(() => { el.classList.remove('is-open'); setTimeout(() => { el.hidden = true; }, 320); }, 3000);
+  };
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function setErr(id, msg) {
+    const input = $('#' + id);
+    const err = $('#' + id + 'Err');
+    const field = input.closest('.field');
+    if (msg) { field.classList.add('has-error'); if (err) err.textContent = msg; input.setAttribute('aria-invalid', 'true'); }
+    else { field.classList.remove('has-error'); if (err) err.textContent = ''; input.removeAttribute('aria-invalid'); }
+  }
+
+  $('#contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    let bad = null;
+    const mark = (id, msg) => { setErr(id, msg); if (msg && !bad) bad = $('#' + id); };
+
+    const name = $('#cName').value.trim();
+    mark('cName', name ? '' : 'Please enter your name');
+
+    const email = $('#cEmail').value.trim();
+    if (!email) mark('cEmail', 'Please enter your email');
+    else if (!EMAIL_RE.test(email)) mark('cEmail', 'That email doesn\'t look right');
+    else mark('cEmail', '');
+
+    const subject = $('#cSubject').value;
+    mark('cSubject', subject ? '' : 'Please choose a topic');
+
+    const msg2 = $('#cMessage').value.trim();
+    if (!msg2) mark('cMessage', 'Please write a message');
+    else if (msg2.length < 10) mark('cMessage', 'Tell us a bit more (at least 10 characters)');
+    else mark('cMessage', '');
+
+    if (bad) { bad.focus(); bad.classList.add('is-shake'); setTimeout(() => bad.classList.remove('is-shake'), 500); return; }
+
+    // Simulate success
+    $('#contactForm').reset();
+    toast('Message sent! We\'ll get back to you within 24 hours. 🐱');
+  });
+
+  // Clear error on input
+  document.querySelectorAll('#contactForm .input').forEach(input => {
+    input.addEventListener('input', () => {
+      const field = input.closest('.field');
+      if (field && field.classList.contains('has-error')) {
+        field.classList.remove('has-error');
+        const err = field.querySelector('.field__err');
+        if (err) err.textContent = '';
+      }
+    });
+  });
+})();
+</script>
+<script src="main.js"></script>
+</body>
+</html>
